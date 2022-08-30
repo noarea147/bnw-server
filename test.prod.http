@@ -1,0 +1,368 @@
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZlNWY4MTUyNDk2N2YzMmUxNDNhNTgiLCJmaXJzdE5hbWUiOiJJZHJpcyIsImxhc3ROYW1lIjoiVGxpbGkiLCJwYXNzd29yZCI6IiQyYiQxMCQubWV5VkhaU3VBN3FqWXZEeEp0UTdPTXhQQjlaZ2Y2aG9lQUxWNlBhUWxKR3hTRFBicUJvdSIsInBob25lTnVtYmVyIjo1MTc4MjA0Niwicm9sZSI6ImFkbWluIiwidmVyaWZpZWQiOnRydWUsInJlZnJlc2hfdG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbWFYSnpkRTVoYldVaU9pSkpaSEpwY3lJc0luQm9iMjVsVG5WdFltVnlJam8xTVRjNE1qQTBOaXdpY205c1pTSTZJbUZrYldsdUlpd2lhV0YwSWpveE5qUTBNRFl3TlRRMmZRLjZtNVprMnRmWEJhbXJKdzh4Njg5aU9VMEhzRUdfS2Z1RnI0WGRoblhoMDgiLCJjcmVhdGVkQXQiOiIyMDIyLTAyLTA1VDExOjI5OjA2LjE2OFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTAyLTA1VDExOjI5OjA2LjE2OFoiLCJfX3YiOjAsImlhdCI6MTY0NDA2MTI5NSwiZXhwIjoxNjQ0NjY2MDk1fQ.t3xIPGqqjpiRKd-aM_0YeFW9WWnZBPvSx1GuR5cARhs
+@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWVkMmRmMjkxNDY5MGRlYjY4ZWEzNDciLCJmaXJzdE5hbWUiOiJBbGFhIiwibGFzdE5hbWUiOiJCZW4gTWJhcmVrIiwicGFzc3dvcmQiOiIkMmIkMTAkUzdhazU4LnRvb002R0tRdS43L25tZTFHNlE1Mm4ucmxPRWpvYmZjaXNCRDc4MkFKYS94cUMiLCJwaG9uZU51bWJlciI6MjUyMTA3NTIsInJvbGUiOiJndWVzdCIsInJlZnJlc2hfdG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbWFYSnpkRTVoYldVaU9pSkJiR0ZoSWl3aWNHaHZibVZPZFcxaVpYSWlPakkxTWpFd056VXlMQ0p5YjJ4bElqb2laM1ZsYzNRaUxDSnBZWFFpT2pFMk5ESTVNek0zTkRkOS5sNjRlb3oydFM1dngyRVJtUkRzTGQ0LTlIc1FNTjVVb3NkRENVVWIxdURjIiwiY3JlYXRlZEF0IjoiMjAyMi0wMS0yM1QxMDoyOTowNy4xMzVaIiwidXBkYXRlZEF0IjoiMjAyMi0wMS0yM1QxMTowMzo1OC4wNzZaIiwiX192IjowLCJ2ZXJpZmljYXRpb25LZXkiOjM2MTE1MCwidmVyaWZpZWQiOnRydWUsImlhdCI6MTY0MjkzNTgzOCwiZXhwIjoxNjQzNTQwNjM4fQ.gVs3-aixjVJRt1b1Jwci49_AN1NgRPwMIv6Igvq5mms
+
+@guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNb3N0ZmEiLCJsYXN0TmFtZSI6IkdoYXJiaSIsInBhc3N3b3JkIjoiJDJiJDEwJEhxa252TnFOc3NtZzBSWS9ob0FLTnU5MU5hZVFNclZ2VkVlMmUualMzOUtLMEgvRnAzUkFTIiwicGhvbmVOdW1iZXIiOjEyMzQ1NjQ4LCJyb2xlIjoiZ3Vlc3QiLCJfaWQiOiI2MWVkMmUyYzkxNDY5MGRlYjY4ZWEzNGEiLCJpYXQiOjE2NDI5MzM4MDUsImV4cCI6MTY0MzUzODYwNX0.apJ4Nbw5ljdLECjyw0fxVlf62-a0CRIamKdvq5eLFQ0
+
+@guest2AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic3MgVGxpbGkiLCJlbWFpbCI6ImJvZHNzc25nby50bGlsaUBnbWFpbC5jbSIsInBhc3N3b3JkIjoiJDJiJDEwJDMveTV3Rk9QS1YxL3JpdHM4RVI0ZmVwakg1MDlEY2JmUHF5MVV1VkpQLm1EbUhEWExFRS95Iiwicm9sZSI6Imd1ZXN0IiwiX2lkIjoiNjFlMGI3MWI1ZjJmZTIwZTdiY2UxNTY4IiwiaWF0IjoxNjQyMTE2ODkxLCJleHAiOjE2NDI3MjE2OTF9.eKJKJhGmTgwU0_BuGQPd-N3qhRtlnrbfEe34I7CbIuQ
+
+### Send SMS
+GET https://www.tunisiesms.tn/client/Api/Api.aspx?fct=sms&key=Ysp84tmIuaEn4feY3SioHIdakugjBQVhLOF/FdH7ND0R0qUKitUQFjnGB9yKkHLebzOXXUCxBtTMhlgUboSHqHh0FlAG9NVe&mobile=21651782046&sms=Hello+World&sender=N+ou+B HTTP/1.1
+content-type: application/json 
+
+### Acknowledgement Url
+GET https://www.tunisiesms.tn/client/Api/Api.aspx?fct=sms&key=Ysp84tmIuaEn4feY3SioHIdakugjBQVhLOF/FdH7ND0R0qUKitUQFjnGB9yKkHLebzOXXUCxBtTMhlgUboSHqHh0FlAG9NVe&msg_id=52515323
+content-type: application/json 
+### Register
+POST {{$dotenv prodUrl}}/user/register HTTP/1.1
+content-type: application/json 
+
+{
+    "firstName": "Idris",
+    "lastName": "Tlili",
+    "phoneNumber": 51782046,         
+    "password": "123456",
+    "role": "guest"
+}
+
+### Login
+POST {{$dotenv prodUrl}}/user/login HTTP/1.1
+content-type: application/json 
+
+{
+    "firstName": "Idris",
+    "lastName": "tlili",
+    "phoneNumber": 28896272,         
+    "password": "123456",
+    "role": "guest"
+}
+
+### Update user
+POST {{$dotenv prodUrl}}/user/update HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "firstName": "Idris Tlili",
+    "phoneNumber": 25210752,  
+    "verified": true,
+    "role": "admin"
+}
+
+### Send SMS
+POST {{$dotenv prodUrl}}/user/send-verification-sms HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
+content-type: application/json 
+
+{
+    "phoneNumber": 25210752     
+}
+
+### Verify Account
+POST {{$dotenv prodUrl}}/user/verify-account HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "phoneNumber": 28896272,
+    "verificationKey": 306623     
+}
+
+
+### Get By phoneNumber
+GET {{$dotenv prodUrl}}/user/getprofile HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "phoneNumber": 51782046     
+}
+
+### Create Game
+POST {{$dotenv prodUrl}}/game/creategame HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+### Start Game
+POST {{$dotenv prodUrl}}/game/startgame HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+
+### Close Game
+POST {{$dotenv prodUrl}}/game/closegame HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+
+### Participate In Game
+POST {{$dotenv prodUrl}}/game/participateingame HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
+content-type: application/json
+
+{
+     
+}
+
+### Guest Answer
+POST {{$dotenv prodUrl}}/game/guestanswer HTTP/1.1
+Authorization: bearer {{guest1AuthToken}}
+content-type: application/json 
+
+{
+     "answer":"yes"
+}
+
+
+### Get Game
+GET {{$dotenv prodUrl}}/game/getgame HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+### Host Answer
+POST {{$dotenv prodUrl}}/game/hostanswer HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+     "answer":"yes"
+}
+
+### Get Game
+GET {{$dotenv prodUrl}}/game/stats HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+### Get token
+POST {{$dotenv prodUrl}}/user/refresh HTTP/1.1
+content-type: application/json 
+
+{
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9vVm9vIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjM4NDEwOTM3fQ.HWqicVUigaqkT33HZ_T6K_Z0L5_VcwPTymrBSuD0D5Y"
+}
+
+### Send Message
+POST {{$dotenv prodUrl}}/notice/sendmessage HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "email": "aymxxen@gmail.com",
+    "password": "123456"
+}
+
+  
+### Get token
+POST {{$dotenv prodUrl}}/user/refresh HTTP/1.1
+content-type: application/json 
+
+{
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FtcGxlIiwiZW1haWwiOiJheW1kZW5AZ21haWwuY29tIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjM3MzY4MDgwfQ.liVHRcuJV15rAG2EM9cr3MQVTiczpZ7cde2o1XJJ0yk"
+}
+
+### Get token
+POST {{$dotenv prodUrl}}/user/updatefcm HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "firebase_token":"11",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FtcGxlIiwiZW1haWwiOiJheW1lbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzcxNzE5OTB9.E0qtGXQsFvnWk_neRGhpXs5PvYmbEFAShz3EN2sYLPQ"
+}
+
+### Get notifications
+POST {{$dotenv prodUrl}}/user/getallnotices HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+
+}
+
+### send message
+POST {{$dotenv prodUrl}}/user/sendmessage HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "Title":"notification title",
+    "Message":"notification message"
+}
+
+### send notification
+POST https://fcm.googleapis.com/fcm/send
+Authorization: key=AAAAKqoUX5k:APA91bGqLpRUQmIiVjbC0uskCp8z2xFWBgQq0PD_21YVA--WZyQjCjXuhzgnM7egSzx8gBPWbKMZR7xJHUQ-ZP8_wFSimeqRG14DOkl9cyP3oYSdIgGg-BUxRT78INttKrEL5SFoZef6
+Content-Type: application/json
+
+{
+    "registration_ids" : ["dUVtjcSYR9K1K1t_rkCO-G:APA91bFYINVdOyhjubY0Kz0F7qfl-xTPhv_cePgd-v0jldg0hEsIH5GpsEgcE1fmy6-XM58YZ6V7A3fJPDtu43g6CHMjJxG4MaqIz-FIqGVT7URC7xPfn2nE-i8Cs2sTNYsfjNTBxJ4a"], 
+    "notification": {
+            "body": "Firebase Cloud Message"
+        }
+
+}
+
+### add friend
+POST {{$dotenv prodUrl}}/user/addfriend HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "friend": "",
+}
+
+
+### Get all users
+GET {{$dotenv prodUrl}}/user/getall HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "email": "aymen@gmail.com",
+    "password": "123456",
+    "role": "admin"
+}
+
+
+### Get user by id
+POST {{$dotenv prodUrl}}/user/getbyid HTTP/1.1
+content-type: application/json 
+
+{
+    "id": "618fe874b19df5fd81d0518a",
+    "email": "aymen@gmail.com",
+    "password": "123456"
+}
+
+### Get user by email
+POST {{$dotenv prodUrl}}/user/getbyemail HTTP/1.1
+content-type: application/json 
+
+{
+    "email": "lex@gmail.com",
+    "password": "123456"
+}
+
+
+
+### Update user
+POST {{$dotenv prodUrl}}/user/update HTTP/1.1
+content-type: application/json 
+
+{
+    "id": "618fe7b0b19df5fd81d05188",
+    "name": "lex",
+    "email": "lex@gmail.com",
+    "password": "1234",
+    "role": "admin"
+}
+
+### Delete user
+POST {{$dotenv prodUrl}}/user/deletebyid HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "id": "619245f3100ba619cc946f1c",
+    "name": "sample",
+    "email": "aymxxen@gmail.com",         
+    "password": "123456",
+    "role": "admin"
+
+}
+
+### Delete user by email
+POST {{$dotenv prodUrl}}/user/deletebyemail HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "id": "619246f8100ba619cc946f22",
+    "name": "sample",
+    "email": "aymxxen@gmail.com",         
+    "password": "123456",
+    "role": "admin"
+}
+
+### Delete all guests
+POST {{$dotenv prodUrl}}/user/deletebyrole HTTP/1.1
+content-type: application/json 
+
+{
+    "role": "guest"
+}
+
+### Delete all admins
+POST {{$dotenv prodUrl}}/user/deletebyrole HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+    "role": "admin"
+}
+
+
+### Delete all staff
+POST {{$dotenv prodUrl}}/user/deletebyrole HTTP/1.1
+content-type: application/json 
+
+{
+    "role": "staff"
+}
+
+### Add friend
+POST {{$dotenv prodUrl}}/user/addfriend HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "friend": "idris@gmail.com"
+}
+
+### Get all friends
+POST {{$dotenv prodUrl}}/user/getfriends HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "id": ""
+}
+
+
+### Remove friend
+POST {{$dotenv prodUrl}}/user/removefriend HTTP/1.1
+content-type: application/json 
+Authorization: bearer {{authToken}}
+
+{
+    "friend": "idris@gmail.com"
+}
+
+### send notification
+POST {{$dotenv prodUrl}}/game/sendnotification HTTP/1.1
+content-type: application/json
+Authorization: bearer {{authToken}}
+
+{
+    "title": "Noir ou Blanc",
+    "body": "vous avez gagné le jeu Noir ou Blanc"
+}
