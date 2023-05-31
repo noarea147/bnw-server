@@ -13,7 +13,7 @@ content-type: application/json
 GET https://www.tunisiesms.tn/client/Api/Api.aspx?fct=sms&key=Ysp84tmIuaEn4feY3SioHIdakugjBQVhLOF/FdH7ND0R0qUKitUQFjnGB9yKkHLebzOXXUCxBtTMhlgUboSHqHh0FlAG9NVe&msg_id=52515323
 content-type: application/json 
 ### Register
-POST {{$dotenv SERVER_URL}}/user/register HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/register HTTP/1.1
 content-type: application/json 
 
 {
@@ -25,7 +25,7 @@ content-type: application/json
 }
 
 ### Login
-POST {{$dotenv localhost}}/user/login HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/login HTTP/1.1
 content-type: application/json 
 
 {
@@ -37,7 +37,7 @@ content-type: application/json
 }
 
 ### forget password
-POST {{$dotenv localhost}}/user/forgot-password HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/forgot-password HTTP/1.1
 content-type: application/json 
 
 {
@@ -45,7 +45,7 @@ content-type: application/json
 }
 
 ### reset password
-POST {{$dotenv localhost}}/user/reset-password HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/reset-password HTTP/1.1
 content-type: application/json 
 
 {
@@ -55,7 +55,7 @@ content-type: application/json
 }
 
 ### Update user
-POST {{$dotenv localhost}}/user/update HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/update HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -67,7 +67,7 @@ content-type: application/json
 }
 
 ### Send SMS
-POST {{$dotenv localhost}}/user/send-verification-sms HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/send-verification-sms HTTP/1.1
 Authorization: bearer {{guestAuthToken}}
 content-type: application/json 
 
@@ -76,7 +76,7 @@ content-type: application/json
 }
 
 ### Verify Account
-POST {{$dotenv localhost}}/user/verify-account HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/verify-account HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -87,7 +87,7 @@ content-type: application/json
 
 
 ### Get By phoneNumber
-GET {{$dotenv localhost}}/user/getprofile HTTP/1.1
+GET {{$dotenv CLIENT_SERVER_URL}}/user/getprofile HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -96,7 +96,7 @@ content-type: application/json
 }
 
 ### Create Game
-POST {{$dotenv localhost}}/game/creategame HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/creategame HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -105,7 +105,7 @@ content-type: application/json
 }
 
 ### Start Game
-POST {{$dotenv localhost}}/game/startgame HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/startgame HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -115,7 +115,7 @@ content-type: application/json
 
 
 ### Close Game
-POST {{$dotenv localhost}}/game/closegame HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/closegame HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -125,7 +125,7 @@ content-type: application/json
 
 
 ### Participate In Game
-POST {{$dotenv localhost}}/game/participateingame HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/participateingame HTTP/1.1
 Authorization: bearer {{guest1AuthToken}}
 content-type: application/json
 
@@ -134,7 +134,7 @@ content-type: application/json
 }
 
 ### Get Game
-GET {{$dotenv localhost}}/game/getgame HTTP/1.1
+GET {{$dotenv CLIENT_SERVER_URL}}/game/getgame HTTP/1.1
 Authorization: bearer {{guest2AuthToken}}
 content-type: application/json 
 
@@ -143,7 +143,7 @@ content-type: application/json
 }
 
 ### Guest Answer
-POST {{$dotenv localhost}}/game/guestanswer HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/guestanswer HTTP/1.1
 Authorization: bearer {{guest1AuthToken}}
 content-type: application/json 
 
@@ -152,7 +152,7 @@ content-type: application/json
 }
 
 ### Host Answer
-POST {{$dotenv localhost}}/game/hostanswer HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/hostanswer HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -161,17 +161,17 @@ content-type: application/json
 }
 
 ### Get Game
-GET {{$dotenv localhost}}/game/stats HTTP/1.1
+GET {{$dotenv CLIENT_SERVER_URL}}/game/stats HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
 ### Lock Answers
-GET {{$dotenv localhost}}/game/lockanswers HTTP/1.1
+GET {{$dotenv CLIENT_SERVER_URL}}/game/lockanswers HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
 ### Get token
-POST {{$dotenv localhost}}/user/refresh HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/refresh HTTP/1.1
 content-type: application/json 
 
 {
@@ -179,7 +179,7 @@ content-type: application/json
 }
 
 ### Send Message
-POST {{$dotenv localhost}}/notice/sendmessage HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/notice/sendmessage HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 
@@ -190,7 +190,7 @@ Authorization: bearer {{authToken}}
 
   
 ### Get token
-POST {{$dotenv localhost}}/user/refresh HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/refresh HTTP/1.1
 content-type: application/json 
 
 {
@@ -198,7 +198,7 @@ content-type: application/json
 }
 
 ### Get token
-POST {{$dotenv localhost}}/user/updatefcm HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/updatefcm HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -208,7 +208,7 @@ content-type: application/json
 }
 
 ### Get notifications
-POST {{$dotenv localhost}}/user/getallnotices HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/getallnotices HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -217,7 +217,7 @@ content-type: application/json
 }
 
 ### send message
-POST {{$dotenv localhost}}/user/sendmessage HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/sendmessage HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -240,7 +240,7 @@ Content-Type: application/json
 }
 
 ### add friend
-POST {{$dotenv localhost}}/user/addfriend HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/addfriend HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -250,7 +250,7 @@ content-type: application/json
 
 
 ### Get all users
-GET {{$dotenv localhost}}/user/getall HTTP/1.1
+GET {{$dotenv CLIENT_SERVER_URL}}/user/getall HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -262,7 +262,7 @@ content-type: application/json
 
 
 ### Get user by id
-POST {{$dotenv localhost}}/user/getbyid HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/getbyid HTTP/1.1
 content-type: application/json 
 
 {
@@ -272,7 +272,7 @@ content-type: application/json
 }
 
 ### Get user by email
-POST {{$dotenv localhost}}/user/getbyemail HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/getbyemail HTTP/1.1
 content-type: application/json 
 
 {
@@ -283,7 +283,7 @@ content-type: application/json
 
 
 ### Update user
-POST {{$dotenv localhost}}/user/update HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/update HTTP/1.1
 content-type: application/json 
 
 {
@@ -295,7 +295,7 @@ content-type: application/json
 }
 
 ### Delete user
-POST {{$dotenv localhost}}/user/deletebyid HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyid HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 
@@ -309,7 +309,7 @@ Authorization: bearer {{authToken}}
 }
 
 ### Delete user by email
-POST {{$dotenv localhost}}/user/deletebyemail HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyemail HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 
@@ -322,7 +322,7 @@ Authorization: bearer {{authToken}}
 }
 
 ### Delete all guests
-POST {{$dotenv localhost}}/user/deletebyrole HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyrole HTTP/1.1
 content-type: application/json 
 
 {
@@ -330,7 +330,7 @@ content-type: application/json
 }
 
 ### Delete all admins
-POST {{$dotenv localhost}}/user/deletebyrole HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyrole HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
@@ -340,7 +340,7 @@ content-type: application/json
 
 
 ### Delete all staff
-POST {{$dotenv localhost}}/user/deletebyrole HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyrole HTTP/1.1
 content-type: application/json 
 
 {
@@ -348,7 +348,7 @@ content-type: application/json
 }
 
 ### Add friend
-POST {{$dotenv localhost}}/user/addfriend HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/addfriend HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 
@@ -357,7 +357,7 @@ Authorization: bearer {{authToken}}
 }
 
 ### Get all friends
-POST {{$dotenv localhost}}/user/getfriends HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/getfriends HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 
@@ -367,7 +367,7 @@ Authorization: bearer {{authToken}}
 
 
 ### Remove friend
-POST {{$dotenv localhost}}/user/removefriend HTTP/1.1
+POST {{$dotenv CLIENT_SERVER_URL}}/user/removefriend HTTP/1.1
 content-type: application/json 
 Authorization: bearer {{authToken}}
 

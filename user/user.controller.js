@@ -71,7 +71,7 @@ exports.SendVerificationSMS = async (req, res) => {
 };
 
 exports.Register = async (req, res) => {
-  // try {
+  try {
     const user = new UserModel(req.body);
     if (await isInDatabase(user)) {
       return res.status(400).json({
@@ -81,10 +81,9 @@ exports.Register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     user.password = hashedPassword;
-    await axios.post(`${process.env.AUTH_SERVER}/token/login`, user)
+    await axios.post(`${process.env.AUTH_SERVER_URL}/token/login`, user)
       .then((response) => {
         user.refresh_token = response.data.refreshToken;
-        console.log(user);
         user.save((err, data) => {
           if (err) {
             res.json({ message: err, status: 'fail' });
@@ -99,9 +98,9 @@ exports.Register = async (req, res) => {
       }).catch((error) => {
         res.json({ message: error, status: 'fail' });
       });
-  // } catch (err) {
-  //   res.status(500).send({ message: 'could not process request', status: 'fail' });
-  // }
+  } catch (err) {
+    res.status(500).send({ message: 'could not process request', status: 'fail' });
+  }
 };
 
 async function getTokens(user) {

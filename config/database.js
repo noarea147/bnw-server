@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 module.exports = function () {
-  console.log("env value",process.env.MONGO_DB_URL);
   const url = process.env.MONGO_DB_URL;
   mongoose.connect(url, { useUnifiedTopology: true });
   mongoose.connection

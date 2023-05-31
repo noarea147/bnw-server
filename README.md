@@ -1,3 +1,19 @@
 # BNW
 yes or no questions game with a host deciding the right answer
 "# bnw-server" 
+# NODE ENVIROMENT
+NODE_ENV=development
+
+# DB
+MONGO_DB_AUTH_URL=mongodb://localhost:27017/BNWDatabaseAuthDev
+MONGO_DB_URL=mongodb://localhost:27017/BNWDatabaseDev
+
+# JWT SECRET KEYS
+ACCESS_TOKEN_SECRET=43ffea19cec98caa1be960f2c76eac5987651651984653cd020c2962ce05f090951254887bbee2dad959bd6a658002745a8638b67c276cbe8be8c1675ae298730d3219e74c2
+ACCESS_TOKEN_SECRET_REFRESH=90953dad959b6eac5987651651984653cd020c296275aed6a658002745a8638b67c276cbe8be8c167243ffea19bb0147bbee2cec98ca90953dad959b6eac56a1be960f2cce05f098730d3219e74c
+
+# APP URLs
+CLIENT_SERVER_URL=http://localhost:3000
+AUTH_SERVER_URL=http://localhost:4000
+
+
