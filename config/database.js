@@ -1,12 +1,20 @@
 /* eslint no-console: "off", func-names: "off" */
-require('dotenv').config();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
+
+require("dotenv").config();
 
 module.exports = function () {
-  mongoose.connect(`${process.env.MONGO_URL}`, { useUnifiedTopology: true });
-  mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
-  }).on('error', (error) => {
-    console.log('Connection error:', error);
-  });
+  console.log("env value",process.env.MONGO_DB_URL);
+  const url = process.env.MONGO_DB_URL;
+  mongoose.connect(url, { useUnifiedTopology: true });
+  mongoose.connection
+    .once("open", () => {
+      console.log(
+        `Connected to MongoDB [AUTH ENVIRONMENT]: ${process.env.NODE_ENV}`
+      );
+    })
+    .on("error", (error) => {
+      console.log("Connection error:", error);
+    });
 };

@@ -13,7 +13,7 @@ content-type: application/json
 GET https://www.tunisiesms.tn/client/Api/Api.aspx?fct=sms&key=Ysp84tmIuaEn4feY3SioHIdakugjBQVhLOF/FdH7ND0R0qUKitUQFjnGB9yKkHLebzOXXUCxBtTMhlgUboSHqHh0FlAG9NVe&msg_id=52515323
 content-type: application/json 
 ### Register
-POST {{$dotenv localhost}}/user/register HTTP/1.1
+POST {{$dotenv SERVER_URL}}/user/register HTTP/1.1
 content-type: application/json 
 
 {
