@@ -10,7 +10,7 @@ module.exports = function () {
   mongoose.connection
     .once("open", () => {
       console.log(
-        `Connected to MongoDB [AUTH ENVIRONMENT]: ${process.env.NODE_ENV}`
+        `Connected to MongoDB [SERVER ENVIRONMENT]: ${process.env.NODE_ENV}`
       );
     })
     .on("error", (error) => {
