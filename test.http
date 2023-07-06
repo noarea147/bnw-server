@@ -19,9 +19,10 @@ content-type: application/json
 {
     "firstName": "guest3",
     "lastName": "guest3",
-    "phoneNumber": 33333333,         
+    "phoneNumber": 335988326,         
     "password": "123456",
-    "role": "guest"
+    "role": "admin",
+    "verified": true
 }
 
 ### Login
@@ -29,11 +30,8 @@ POST {{$dotenv CLIENT_SERVER_URL}}/user/login HTTP/1.1
 content-type: application/json 
 
 {
-    "firstName": "idris",
-    "lastName": "tlili",
-    "phoneNumber": 51782046,         
-    "password": "123456",
-    "role": "guest"
+    "phoneNumber": 33988326,         
+    "password": "123456"
 }
 
 ### forget password
@@ -239,14 +237,6 @@ Content-Type: application/json
 
 }
 
-### add friend
-POST {{$dotenv CLIENT_SERVER_URL}}/user/addfriend HTTP/1.1
-Authorization: bearer {{authToken}}
-content-type: application/json 
-
-{
-    "friend": "",
-}
 
 
 ### Get all users
