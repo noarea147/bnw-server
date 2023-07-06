@@ -2,6 +2,9 @@ require('dotenv').config();
 const GameModel = require('./game.model');
 const UserModel = require('../user/user.model');
 const axios = require('axios');
+
+
+
 exports.CreateGame = async (req, res) => {
   try {
     const gameRunning = await GameModel.findOne({ closed: 'false' });

@@ -24,7 +24,6 @@ const userSchema = new Schema(
     verified: {
       type: Boolean,
       default: false,
-      expires: '30m',
     },
     verificationKey: Number,
   },
