@@ -15,11 +15,12 @@ exports.Register = async (req, res) => {
       lastName,
       password,
       phoneNumber,
+      email,
       state,
       birthday,
       gender,
     } = req.body;
-    const user = await UserModel.findOne({ phoneNumber: phoneNumber });
+    const user = await UserModel.findOne({ email: email });
     if (user) {
       return res
         .status(400)
@@ -30,6 +31,7 @@ exports.Register = async (req, res) => {
       firstName,
       lastName,
       phoneNumber,
+      email,
       state,
       birthday,
       gender,
@@ -65,13 +67,14 @@ exports.Register = async (req, res) => {
 
 exports.Login = async (req, res) => {
   try {
-    const user = await UserModel.findOne({ phoneNumber: req.body.phoneNumber });
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email: email });
     if (!user) {
       res.json({ message: "User not found", status: "fail" });
     }
     const authUser = {
       id: user._id.toString(),
-      password: req.body.password,
+      password: password,
     };
     const response = await axios.post(
       process.env.AUTH_SERVER_URL + "/user/login",

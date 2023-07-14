@@ -6,7 +6,7 @@ const jwt = require('../middleware/jwt');
 
 router.post('/creategame', jwt.authenticateTokenAdmin, GameController.CreateGame);
 
-router.post('/startgame', jwt.authenticateTokenAdmin, GameController.StartGame);
+router.post('/startgame', GameController.StartGame);
 
 router.post('/closegame', jwt.authenticateTokenAdmin, GameController.CloseGame);
 
