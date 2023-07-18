@@ -21,8 +21,7 @@ content-type: application/json
     "lastName": "guest3",
     "phoneNumber": 123456,         
     "password": "123456",
-    "role": "admin",
-    "verified": true
+    "email":"1234@123.com"
 }
 
 ### Login
@@ -30,7 +29,7 @@ POST {{$dotenv CLIENT_SERVER_URL}}/user/login HTTP/1.1
 content-type: application/json 
 
 {
-    "phoneNumber": "123456",         
+    "email": "1234@123.com",         
     "password": "123456"
 }
 

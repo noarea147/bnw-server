@@ -4,9 +4,7 @@ const axios = require("axios");
 const XmlToJson = require("xml-js");
 const UserModel = require("./user.model");
 const jwt = require("../helpers/jwt");
-
-
-
+const { sendClientEmail } = require("../helpers/nodemailer");
 
 exports.Register = async (req, res) => {
   try {
@@ -26,6 +24,8 @@ exports.Register = async (req, res) => {
         .status(400)
         .json({ message: "User already exists", status: "fail" });
     }
+    let verificationKey = Math.floor(Math.random() * 1000000);
+    // phoneNumber = parseInt(phoneNumber)
 
     const newUser = new UserModel({
       firstName,
@@ -35,6 +35,7 @@ exports.Register = async (req, res) => {
       state,
       birthday,
       gender,
+      verificationKey,
     });
     const authUser = {
       id: newUser._id.toString(),
@@ -47,6 +48,16 @@ exports.Register = async (req, res) => {
     );
     if (response.status === 201) {
       newUser.save();
+      sendClientEmail({
+        from: process.env.CLIENT_SERVER_INBOX_EMAIL,
+        to: newUser.email,
+        subject: "Welcome to N ou B",
+        html: `<h1>Hi ${newUser.firstName} ${newUser.lastName}</h1>
+        <p>Thank you for joining N ou B</p>
+        <p>Here is your verification link:<a href="${process.env.CLIENT_SERVER_URL}/${newUser._id}/${newUser.verificationKey}">verification link</a> </p>
+        <p>Best regards</p>
+        <p>N ou B team</p>`,
+      });
       return res.status(201).json({
         message: "User created",
         status: "success",
@@ -68,7 +79,9 @@ exports.Register = async (req, res) => {
 exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await UserModel.findOne({ email: email });
+    const user = await UserModel.findOne({
+      email: { $regex: new RegExp(email, "i") },
+    });
     if (!user) {
       res.json({ message: "User not found", status: "fail" });
     }
@@ -116,11 +129,32 @@ exports.VerifyAccount = async (req, res) => {
     return res
       .status(200)
       .json({ message: "Account verified", status: "success" });
-
   } catch (error) {
     return res
       .status(500)
       .json({ message: "Internal server error", status: "fail" });
+  }
+};
+
+exports.EmailVerification = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const verificationKey = req.params.VerificationKey;
+    const user = await UserModel.findOne({ _id: userId });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found", status: "fail" });
+    }
+ 
+    if (user.verificationKey !== (parseInt(verificationKey))) {
+      return res.status(400).send("code is not correct");
+    }
+    user.verified = true;
+    await user.save();
+    return res.status(200).send("Account verified");
+  } catch (error) {
+    return res.status(500).send("Something went wrong");
   }
 };
 

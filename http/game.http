@@ -1,7 +1,8 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjI4ZmE3MmYyNjVhM2JmN2RiZTA3ZiIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5NDI0MDQzLCJleHAiOjE2ODk0NDU2NDN9.uR1gnsgnwmfuH_QhLoOXXdRnojYrE9IwvMe7PmPSerI
-@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJndWVzdDEiLCJsYXN0TmFtZSI6Imd1ZXN0IiwicGFzc3dvcmQiOiIkMmIkMTAkbmdHMXl4SkMuM0hCT1prRVJTN1hoLkdZMkJzalp2N2FpNmtjWXZhMHd1bk9tZ3Z2VmI5d0MiLCJwaG9uZU51bWJlciI6MTExMTExMTEsInJvbGUiOiJndWVzdCIsInZlcmlmaWVkIjpmYWxzZSwiX2lkIjoiNjIwNDNkMDE4ZTVhNTgyZmYxNTY0YTJjIiwiaWF0IjoxNjQ0NDQ0OTI5LCJleHAiOjE2NDUwNDk3Mjl9.9E5nuykK63QgIz9-m36m1Ta9_4ICCAQqi0wRNY4JCPs
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjRiOGQ3NDhkMDIxYmRmOTg4YjlkMCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5NjMzMTU0LCJleHAiOjE2ODk2NTQ3NTR9.9UW4wPIHJw1xPRVDy4PG-fmCydfubzrRLBcLDC8z3VQ
 
-@guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJndWVzdDIiLCJsYXN0TmFtZSI6Imd1ZXN0MiIsInBhc3N3b3JkIjoiJDJiJDEwJHZhVWNCN29MQUh4ZDRHcDJpOVZZYS51RkdNM3BsMXRyY25NL3pJRDNncUEwLnhOVXdReGpTIiwicGhvbmVOdW1iZXIiOjIyMjIyMjIyLCJyb2xlIjoiZ3Vlc3QiLCJ2ZXJpZmllZCI6ZmFsc2UsIl9pZCI6IjYyMDQzZDhkOWQzNjFiOTY4ZjhmMDQxOSIsImlhdCI6MTY0NDQ0NTA2OSwiZXhwIjoxNjQ1MDQ5ODY5fQ.tMLpvV4LwMNSus7Pf9PTTREZRr7LCg2pqpDXatDra_c
+@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjQzOGExZWFhNzQzNjA3MDA3NWRhZSIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTYzMDk4MSwiZXhwIjoxNjg5NjUyNTgxfQ.eUHYE7OJkyqAZoPiXsDZauv8HdJCdBMgW0u8lx9guF4
+
+@guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlMTMyMjNjNTM2MWRkMjE4NzQzZiIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTY0MTI2NiwiZXhwIjoxNjg5NjYyODY2fQ.jnICB22pi1uk_RcnlRMirFIRq3YBZ6U60w9vMDXvAdc
 
 @guest2AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJndWVzdDMiLCJsYXN0TmFtZSI6Imd1ZXN0MyIsInBhc3N3b3JkIjoiJDJiJDEwJGJ5b0J0M3dwRTZQYWtFNVhxY3JIaGV2RkhjLzNQeXRMMU9kbkg2TEdQMVZyeS9pSUtZZ3RTIiwicGhvbmVOdW1iZXIiOjMzMzMzMzMzLCJyb2xlIjoiZ3Vlc3QiLCJ2ZXJpZmllZCI6ZmFsc2UsIl9pZCI6IjYyMDQzZGFiOWQzNjFiOTY4ZjhmMDQxYyIsImlhdCI6MTY0NDQ0NTA5OSwiZXhwIjoxNjQ1MDQ5ODk5fQ.DUdKiCe6pUyCM1o4QzleamucJH20FG4oaKgde22B3qA
 
@@ -34,40 +35,59 @@ content-type: application/json
 }
 
 
-### Participate In Game
+### Participate In Game 1
+POST {{$dotenv CLIENT_SERVER_URL}}/game/participateingame HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
+content-type: application/json
+
+{
+     "userId" : "64b438a1eaa7436070075dae"
+}
+
+### Participate In Game 2
 POST {{$dotenv CLIENT_SERVER_URL}}/game/participateingame HTTP/1.1
 Authorization: bearer {{guest1AuthToken}}
 content-type: application/json
 
 {
-     
+     "userId" : "64b5e13223c5361dd218743f"
 }
 
 ### Get Game
-GET {{$dotenv CLIENT_SERVER_URL}}/game/getgame HTTP/1.1
-Authorization: bearer {{guest2AuthToken}}
+POST  {{$dotenv CLIENT_SERVER_URL}}/game/getgame HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
 content-type: application/json 
 
 {
-
+    "id" : "64b5e13223c5361dd218743f"
 }
 
-### Guest Answer
+### Guest 1 Answer
+POST {{$dotenv CLIENT_SERVER_URL}}/game/guestanswer HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
+content-type: application/json 
+
+{
+    "userId" : "64b438a1eaa7436070075dae",
+     "answer":"yes"
+}
+
+### Guest 2 Answer
 POST {{$dotenv CLIENT_SERVER_URL}}/game/guestanswer HTTP/1.1
 Authorization: bearer {{guest1AuthToken}}
 content-type: application/json 
 
 {
-     "answer":"yes"
+    "userId" :"64b5e13223c5361dd218743f",
+     "answer":"no"
 }
-
 ### Host Answer
 POST {{$dotenv CLIENT_SERVER_URL}}/game/hostanswer HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
 
 {
-     "answer":"yes"
+     "answer":"no"
 }
 
 ### Get Game

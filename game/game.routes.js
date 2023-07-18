@@ -18,7 +18,7 @@ router.post('/hostanswer', jwt.authenticateTokenAdmin, GameController.HostAnswer
 
 router.get('/stats', GameController.GameStats);
 
-router.get('/getgame', jwt.authenticateToken, GameController.GetGame);
+router.post('/getgame', jwt.authenticateToken, GameController.GetGame);
 
 router.post('/sendnotification', jwt.authenticateToken, GameController.SendNotification);
 
