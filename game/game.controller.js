@@ -74,29 +74,32 @@ exports.StartGame = async (req, res) => {
 exports.CloseGame = async (req, res) => {
   try {
     const game = await GameModel.findOneAndUpdate(
-      { closed: "false" },
-      { closed: "true", status: "ended" },
+      { closed: false },
+      { closed: true, status: "ended" },
       { new: true }
     );
-    // users.forEach(async (user) => {
-    //   // get game state for player
-    //   var gameState = await getGameStateForUser(game, user._id);
-    //   await sendNotificationToUser(user._id, gameState);
-    // });
+
     if (!game) {
-      res.json({
-        message: "something went wrong",
+      return res.json({
+        message: "Something went wrong",
         status: "fail",
       });
     }
+    // Uncomment and implement the necessary code for handling notifications
+    // users.forEach(async (user) => {
+    //   const gameState = await getGameStateForUser(game, user._id);
+    //   await sendNotificationToUser(user._id, gameState);
+    // });
+
     return res.json({
       message: game,
       status: "success",
     });
   } catch (err) {
-    res
-      .status(500)
-      .send({ message: "could not process request", status: "fail" });
+    return res.status(500).json({
+      message: "Could not process the request",
+      status: "fail",
+    });
   }
 };
 
@@ -175,7 +178,6 @@ exports.GuestAnswer = async (req, res) => {
       closed: false,
       currentRound: { $elemMatch: { player: userId } },
     });
-    console.log(gameContainingUser);
 
     if (gameContainingUser.length === 0) {
       return res.status(400).json({
@@ -254,7 +256,8 @@ exports.HostAnswer = async (req, res) => {
           status: "success",
         });
       }
-      if (game.activeRound === parseInt(process.env.MAX_ROUNDS, 10)) {
+      //number of rounds
+      if (game.activeRound >= 10) {
         // get the currentRound table and populate the player field
         const playersLeft = await GameModel.findOne({ closed: "false" })
           .populate({
@@ -264,20 +267,19 @@ exports.HostAnswer = async (req, res) => {
           .lean();
         const winners = [];
         playersLeft.currentRound.forEach((element) => {
-          winners.push({
-            firstName: element.player.firstName,
-            lastName: element.player.lastName,
-            phoneNumber: element.player.phoneNumber,
-          });
+          console.log("palyer id ", element.player._id.toString());
+          winners.push(element.player);
         });
         game.winners = winners;
-        game.closed = false;
-        game.status = "giving results";
+        game.closed = "true";
+        game.status = "ended";
         await game.save();
         // await notifyPlayersByNewState(game)
         return res.json({ message: "We have some winners", status: "success" });
       }
       // await notifyPlayersByNewState(game)
+      game.status = "running";
+      await game.save();
       return res.json({
         message: "you have successfully eliminated players with wrong answers",
         status: "success",
@@ -287,6 +289,35 @@ exports.HostAnswer = async (req, res) => {
     res
       .status(500)
       .send({ message: "could not process request", status: "fail" });
+  }
+};
+
+exports.checkWinnersList = async (req, res) => {
+  const { userId, gameId } = req.body;
+  try {
+    const game = await GameModel.findById(gameId).populate("winners");
+    if (!game) {
+      return res.status(404).send({
+        message: "Game not found",
+        status: "fail",
+      });
+    } else {
+      let isWinner = false;
+      game.winners.forEach((winner) => {
+        console.log(winner);
+        if (userId === winner._id.toString()) {
+          isWinner = true;
+        }
+      });
+      return res.status(200).send({
+        isWinner: isWinner,
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: "Could not process the request",
+      status: "fail",
+    });
   }
 };
 
@@ -424,7 +455,6 @@ exports.SendNotification = async (req, res) => {
     await axios
       .post(url, message, { headers })
       .then((response) => {
-        console.log(response);
         return res.json({ message: "notification sent", status: "success" });
       })
       .catch((error) => {
@@ -524,6 +554,7 @@ async function getGameStateForUser(game, userId) {
     }
   });
   const gameState = {
+    gameId:game._id,
     userInCurrentRound: userInCurrentRound,
     gameStatus: game.status,
     activeRound: game.activeRound,
