@@ -290,7 +290,7 @@ exports.Update = async (req, res) => {
     lastName && (user.lastName = lastName);
     lastName && (user.phoneNumber = phoneNumber);
     state && (user.state = state);
-    if (email) {
+    if (email !== user.email) {
       user.verified = false;
       user.email = email;
       verificationKey = Math.floor(Math.random() * 1000000);
@@ -307,6 +307,7 @@ exports.Update = async (req, res) => {
       });
     }
     await user.save();
+    delete user.verificationKey;
     return res.status(200).send({ message: user, status: "success" });
   } catch (err) {
     res
@@ -318,29 +319,26 @@ exports.Update = async (req, res) => {
 exports.ForgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await UserModel.findOne({ email: email });
+    const user = await UserModel.findOne({
+      email: { $regex: new RegExp(email, "i") },
+    });
     if (!user) {
       return res.json({ message: "User not found", status: "fail" });
     }
-    const code = Math.floor(
-      Math.random() * (999999999 - 100000000) + 100000000
+    const userId = user._id.toString();
+    const response = await axios.post(
+      process.env.AUTH_SERVER_URL + "/user/forgot-password",
+      { id: userId, email: email }
     );
-    sendClientEmail({
-      from: process.env.CLIENT_SERVER_INBOX_EMAIL,
-      to: user.email,
-      subject: "Welcome to N ou B",
-      html: `<h1>Hi ${user.firstName} ${user.lastName}</h1>
-      <p>This is your rest password code</p>
-      <p>Code : ${code}</p>
-      <p>Best regards</p>
-      <p>N ou B team</p>`,
-    });
-
-    user.password_reset_code = code;
-    await user.save();
-    return res
-      .status(200)
-      .json({ message: "Verification code sent", status: "success" });
+    if (response.status === 200) {
+      return res
+        .status(200)
+        .json({ message: response.data.message, status: "success" });
+    } else {
+      res
+        .status(400)
+        .send({ message: "could not process request", status: "fail" });
+    }
   } catch (err) {
     res
       .status(500)
@@ -350,32 +348,44 @@ exports.ForgotPassword = async (req, res) => {
 
 exports.ResetPassword = async (req, res) => {
   try {
-    const { email, code, password } = req.body;
-    const user = await UserModel.findOne({ email: email });
+    const { id, code, password } = req.body;
+    const user = await UserModel.findOne({ id: id });
     if (!user) {
       return res.json({ message: "User not found", status: "fail" });
     }
-    if (user.password_reset_code !== code) {
-      return res.json({ message: "Invalid code", status: "fail" });
-    }
+    const userId = user._id.toString();
     if (code && password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      user.password = hashedPassword;
-      user.password_reset_code = null;
-      await user.save();
-      return res.status(200).send({
-        message: "Password reset successfully",
-        status: "success",
-      });
+      const response = await axios.post(
+        process.env.AUTH_SERVER_URL + "/user/reset-password",
+        { id: userId, code: code, password: password }
+      );
+      if (response.status === 200) {
+        return res
+          .status(200)
+          .json({ message: response.data.message, status: "success" });
+      } else {
+        res
+          .status(400)
+          .send({ message: "could not process request", status: "fail" });
+      }
     } else if (code) {
-      return res.status(200).send({
-        message: "The code is valid",
-        status: "success",
-      });
+      const response = await axios.post(
+        process.env.AUTH_SERVER_URL + "/user/reset-password",
+        { id: userId, code: code }
+      );
+      if (response.status === 200) {
+        return res
+          .status(200)
+          .json({ message: response.data.message, status: "success" });
+      } else {
+        res
+          .status(400)
+          .send({ message: "could not process request", status: "fail" });
+      }
     }
   } catch (err) {
     res
       .status(500)
-      .send({ message: "could not process request", status: "fail" });
+      .send({ message: "Could not process the request", status: "fail" });
   }
 };
