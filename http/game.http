@@ -1,6 +1,6 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjY2NTU1YTA1Y2E5YjcwZmI1MDlkYyIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5Njc1MjA4LCJleHAiOjE2ODk2OTY4MDh9.iiCxIwXUgd_IP1ymJr8Jrd9Hbez3kAXRazYyT8pluqM
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlNzI0Mjc2N2MyMjM0ZTlhMDEzZSIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5NjU0Nzg5LCJleHAiOjE2ODk2NzYzODl9.9uOEqHQ0gZMUqJXbwo-82Ye7ZR-Hz6vSpktVlnwxT9c
 
-@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjQzOGExZWFhNzQzNjA3MDA3NWRhZSIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTYzMDk4MSwiZXhwIjoxNjg5NjUyNTgxfQ.eUHYE7OJkyqAZoPiXsDZauv8HdJCdBMgW0u8lx9guF4
+@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlMTMyMjNjNTM2MWRkMjE4NzQzZiIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTY1NTQ0NCwiZXhwIjoxNjg5Njc3MDQ0fQ.dH2ZZCfwNkHgyJfZ1UDA8FWK4xN4SsIoOKD_9TKZXwM
 
 @guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlMTMyMjNjNTM2MWRkMjE4NzQzZiIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTY0MTI2NiwiZXhwIjoxNjg5NjYyODY2fQ.jnICB22pi1uk_RcnlRMirFIRq3YBZ6U60w9vMDXvAdc
 
@@ -59,7 +59,7 @@ Authorization: bearer {{guestAuthToken}}
 content-type: application/json 
 
 {
-    "id" : "64b5e13223c5361dd218743f"
+    "id" : "64b438a1eaa7436070075dae"
 }
 
 ### Guest 1 Answer
@@ -87,13 +87,22 @@ Authorization: bearer {{authToken}}
 content-type: application/json 
 
 {
-     "answer":"no"
+     "answer":"yes"
 }
 
 ### Get Game
 GET {{$dotenv CLIENT_SERVER_URL}}/game/stats HTTP/1.1
 Authorization: bearer {{authToken}}
 content-type: application/json 
+
+### Get Game Winners
+GET {{$dotenv CLIENT_SERVER_URL}}/game/gameWinner HTTP/1.1
+content-type: application/json 
+
+{
+    "gameId" : "64b616337094acdef4821a95",
+    "userId" : "64b438a1eaa7436070075dae"
+}
 
 ### Lock Answers
 GET {{$dotenv CLIENT_SERVER_URL}}/game/lockanswers HTTP/1.1
