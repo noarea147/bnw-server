@@ -58,10 +58,11 @@ exports.Register = async (req, res) => {
         <p>Best regards</p>
         <p>N ou B team</p>`,
       });
+      const { verificationKey, ...userData } = newUser.toObject();
       return res.status(201).json({
         message: "User created",
         status: "success",
-        data: { user: newUser, tokens: response.data },
+        data: { user: userData, tokens: response.data },
       });
     } else {
       return res
@@ -83,7 +84,7 @@ exports.Login = async (req, res) => {
       email: { $regex: new RegExp(email, "i") },
     });
     if (!user) {
-      res.json({ message: "User not found", status: "fail" });
+      return res.json({ message: "User not found", status: "fail" });
     }
     const authUser = {
       id: user._id.toString(),
@@ -94,10 +95,11 @@ exports.Login = async (req, res) => {
       authUser
     );
     if (response.status === 200) {
+      const { verificationKey, ...userData } = user.toObject();
       res.json({
         message: "User logged in successfully",
         status: "success",
-        data: { user: user, tokens: response.data },
+        data: { user: userData, tokens: response.data },
       });
     } else {
       res.json({
@@ -307,8 +309,9 @@ exports.Update = async (req, res) => {
       });
     }
     await user.save();
-    delete user.verificationKey;
-    return res.status(200).send({ message: user, status: "success" });
+    const { verificationKey, ...userData } = user.toObject();
+
+    return res.status(200).send({ message: userData, status: "success" });
   } catch (err) {
     res
       .status(500)
