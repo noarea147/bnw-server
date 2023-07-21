@@ -12,4 +12,5 @@ router.post('/send-verification-sms', UserController.SendVerificationSMS);
 router.post('/verify-account', jwt.authenticateToken, UserController.VerifyAccount);
 router.post('/forgot-password', UserController.ForgotPassword);
 router.post('/reset-password', UserController.ResetPassword);
+router.post('/refresh', UserController.Refresh);
 module.exports = router;

@@ -5,6 +5,8 @@
 
 @guest2AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJndWVzdDMiLCJsYXN0TmFtZSI6Imd1ZXN0MyIsInBhc3N3b3JkIjoiJDJiJDEwJGJ5b0J0M3dwRTZQYWtFNVhxY3JIaGV2RkhjLzNQeXRMMU9kbkg2TEdQMVZyeS9pSUtZZ3RTIiwicGhvbmVOdW1iZXIiOjMzMzMzMzMzLCJyb2xlIjoiZ3Vlc3QiLCJ2ZXJpZmllZCI6ZmFsc2UsIl9pZCI6IjYyMDQzZGFiOWQzNjFiOTY4ZjhmMDQxYyIsImlhdCI6MTY0NDQ0NTA5OSwiZXhwIjoxNjQ1MDQ5ODk5fQ.DUdKiCe6pUyCM1o4QzleamucJH20FG4oaKgde22B3qA
 
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjgzZTU4YTVjZGExNjk4OWIxYTEwYSIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTkwMDEwMCwiZXhwIjoxNjkwMTU5MzAwfQ.1i7uPOA8VJNjsg8p9Pm54LhrOAnZE3mRBE81v1dwCgc
+
 ### Send SMS
 GET https://www.tunisiesms.tn/client/Api/Api.aspx?fct=sms&key=Ysp84tmIuaEn4feY3SioHIdakugjBQVhLOF/FdH7ND0R0qUKitUQFjnGB9yKkHLebzOXXUCxBtTMhlgUboSHqHh0FlAG9NVe&mobile=21651782046&sms=Hello+World&sender=N+ou+B HTTP/1.1
 content-type: application/json 
@@ -169,9 +171,10 @@ content-type: application/json
 ### Get token
 POST {{$dotenv CLIENT_SERVER_URL}}/user/refresh HTTP/1.1
 content-type: application/json 
+Authorization: bearer {{refreshToken}}
 
 {
-    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9vVm9vIiwicm9sZSI6Imd1ZXN0IiwiaWF0IjoxNjM4NDEwOTM3fQ.HWqicVUigaqkT33HZ_T6K_Z0L5_VcwPTymrBSuD0D5Y"
+    
 }
 
 ### Send Message

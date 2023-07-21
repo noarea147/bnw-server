@@ -196,33 +196,30 @@ exports.SendVerificationSMS = async (req, res) => {
 
 exports.Refresh = async (req, res) => {
   try {
-    UserModel.findOne(
-      { refresh_token: req.body.refresh_token },
-      async (err, user) => {
-        if (err) {
-          res.json({ message: err, status: "fail" });
-        }
-        if (!user) {
-          res.json({ message: "User not found", status: "fail" });
-        } else {
-          await axios
-            .post(`${process.env.AUTH_SERVER}/token/refresh`, user)
-            .then((response) => {
-              res.json({
-                accessToken: response.data.accessToken,
-                status: "success",
-              });
-            })
-            .catch((error) => {
-              res.json({ message: error, status: "fail" });
-            });
-        }
-      }
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(" ")[1];
+
+    const headers = {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`,
+    };
+    const config = {
+      headers,
+    };
+    const response = await axios.get(
+      `${process.env.AUTH_SERVER_URL}/user/refresh`,
+      config
     );
+    res.json({
+      message: "User logged in successfully",
+      data: {
+        accessToken: response.data.accessToken,
+      },
+      status: "success",
+    });
   } catch (err) {
-    res
-      .status(500)
-      .send({ message: "could not process request", status: "fail" });
+    LOG.error(err.message);
+    res.status(403).send({ message: "wrong credentials", status: "fail" });
   }
 };
 
@@ -351,8 +348,8 @@ exports.ForgotPassword = async (req, res) => {
 
 exports.ResetPassword = async (req, res) => {
   try {
-    const { id, code, password } = req.body;
-    const user = await UserModel.findOne({ id: id });
+    const { email, code, password } = req.body;
+    const user = await UserModel.findOne({ email: email });
     if (!user) {
       return res.json({ message: "User not found", status: "fail" });
     }

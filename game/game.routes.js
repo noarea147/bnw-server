@@ -43,7 +43,7 @@ router.get(
   jwt.authenticateTokenAdmin,
   GameController.LockAnswers
 );
-router.get(
+router.post(
   "/gameWinner",
   GameController.checkWinnersList
 );

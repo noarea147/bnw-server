@@ -301,16 +301,17 @@ exports.checkWinnersList = async (req, res) => {
         message: "Game not found",
         status: "fail",
       });
-    } else {
-      let isWinner = false;
+    } else if (game.status === "ended") {
+      let isWinner = "you lost the game";
       game.winners.forEach((winner) => {
-        console.log(winner);
         if (userId === winner._id.toString()) {
-          isWinner = true;
+          isWinner = "you won the game";
         }
       });
+      return res.status(200).json({ isWinner: isWinner, status: "success" });
+    } else {
       return res.status(200).send({
-        isWinner: isWinner,
+        isWinner: "game is not over yet",
       });
     }
   } catch (err) {
@@ -554,7 +555,7 @@ async function getGameStateForUser(game, userId) {
     }
   });
   const gameState = {
-    gameId:game._id,
+    gameId: game._id,
     userInCurrentRound: userInCurrentRound,
     gameStatus: game.status,
     activeRound: game.activeRound,
