@@ -1,6 +1,6 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjczYzMwMDMzY2Q2ZmYwMGNjODU5YSIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5NzMwMTU1LCJleHAiOjE2ODk3NTE3NTV9.7fCa8_f1tQ-HxZQcPOfMUghnMLBOWYQUWpTNOHp5ImM
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjlkNDBkNjU0YzM4ZDg0ZDJlNzQzOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5OTAxNjA5LCJleHAiOjE2ODk5MjMyMDl9.zbJQmIzLLY2C2izoFOO7J25lLhzAb4Wh60L-x2BR3Q8
 
-@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlMTMyMjNjNTM2MWRkMjE4NzQzZiIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTY1NTQ0NCwiZXhwIjoxNjg5Njc3MDQ0fQ.dH2ZZCfwNkHgyJfZ1UDA8FWK4xN4SsIoOKD_9TKZXwM
+@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjlkNDBkNjU0YzM4ZDg0ZDJlNzQzOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjg5OTAxNjA5LCJleHAiOjE2ODk5MjMyMDl9.zbJQmIzLLY2C2izoFOO7J25lLhzAb4Wh60L-x2BR3Q8
 
 @guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVlMTMyMjNjNTM2MWRkMjE4NzQzZiIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTY0MTI2NiwiZXhwIjoxNjg5NjYyODY2fQ.jnICB22pi1uk_RcnlRMirFIRq3YBZ6U60w9vMDXvAdc
 
@@ -34,6 +34,15 @@ content-type: application/json
 
 }
 
+### Host Answer
+POST {{$dotenv CLIENT_SERVER_URL}}/game/hostanswer HTTP/1.1
+Authorization: bearer {{authToken}}
+content-type: application/json 
+
+{
+     "answer":"yes"
+}
+
 
 ### Participate In Game 1
 POST {{$dotenv CLIENT_SERVER_URL}}/game/participateingame HTTP/1.1
@@ -59,7 +68,7 @@ Authorization: bearer {{guestAuthToken}}
 content-type: application/json 
 
 {
-    "id" : "64b438a1eaa7436070075dae"
+    "id" : "64b83e58a5cda16989b1a10a"
 }
 
 ### Guest 1 Answer
@@ -81,14 +90,7 @@ content-type: application/json
     "userId" :"64b5e13223c5361dd218743f",
      "answer":"no"
 }
-### Host Answer
-POST {{$dotenv CLIENT_SERVER_URL}}/game/hostanswer HTTP/1.1
-Authorization: bearer {{authToken}}
-content-type: application/json 
 
-{
-     "answer":"yes"
-}
 
 ### Get Game
 GET {{$dotenv CLIENT_SERVER_URL}}/game/stats HTTP/1.1
@@ -96,12 +98,12 @@ Authorization: bearer {{authToken}}
 content-type: application/json 
 
 ### Get Game Winners
-GET {{$dotenv CLIENT_SERVER_URL}}/game/gameWinner HTTP/1.1
+POST  {{$dotenv CLIENT_SERVER_URL}}/game/gameWinner HTTP/1.1
 content-type: application/json 
 
 {
-    "gameId" : "64b616337094acdef4821a95",
-    "userId" : "64b438a1eaa7436070075dae"
+    "gameId" : "64b9ed444af9c559dd378540",
+    "userId" : "64b83e58a5cda16989b1a10a"
 }
 
 ### Lock Answers
