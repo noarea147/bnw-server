@@ -4,7 +4,7 @@ const axios = require("axios");
 const XmlToJson = require("xml-js");
 const UserModel = require("./user.model");
 const jwt = require("../helpers/jwt");
-const { sendClientEmail } = require("../helpers/nodemailer");
+const { sendClientEmail } = require("../helpers/nodeMailer");
 
 exports.Register = async (req, res) => {
   try {
