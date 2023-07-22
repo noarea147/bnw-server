@@ -1,5 +1,5 @@
 @authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZlNWY4MTUyNDk2N2YzMmUxNDNhNTgiLCJmaXJzdE5hbWUiOiJJZHJpcyIsImxhc3ROYW1lIjoiVGxpbGkiLCJwYXNzd29yZCI6IiQyYiQxMCQubWV5VkhaU3VBN3FqWXZEeEp0UTdPTXhQQjlaZ2Y2aG9lQUxWNlBhUWxKR3hTRFBicUJvdSIsInBob25lTnVtYmVyIjo1MTc4MjA0Niwicm9sZSI6ImFkbWluIiwidmVyaWZpZWQiOnRydWUsInJlZnJlc2hfdG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKbWFYSnpkRTVoYldVaU9pSkpaSEpwY3lJc0luQm9iMjVsVG5WdFltVnlJam8xTVRjNE1qQTBOaXdpY205c1pTSTZJbUZrYldsdUlpd2lhV0YwSWpveE5qUTBNRFl3TlRRMmZRLjZtNVprMnRmWEJhbXJKdzh4Njg5aU9VMEhzRUdfS2Z1RnI0WGRoblhoMDgiLCJjcmVhdGVkQXQiOiIyMDIyLTAyLTA1VDExOjI5OjA2LjE2OFoiLCJ1cGRhdGVkQXQiOiIyMDIyLTAyLTA1VDExOjI5OjA2LjE2OFoiLCJfX3YiOjAsImlhdCI6MTY0NDA2MTI5NSwiZXhwIjoxNjQ0NjY2MDk1fQ.t3xIPGqqjpiRKd-aM_0YeFW9WWnZBPvSx1GuR5cARhs
-@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Yjc1MTkzOWM2ODBmOGMxNzM0MWExNCIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY4OTc5NTI5NCwiZXhwIjoxNjg5ODE2ODk0fQ.krFxNP3xmbrFdX5RZBFSc-E_t1iqXgrRnAEgXb2ULxk
+@guestAuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmI5MDIwYWY2NWJlNjIzOTVlNTExMyIsInJvbGUiOiJndWVzdCIsImlhdCI6MTY5MDAxMzcyOSwiZXhwIjoxNjkwMDM1MzI5fQ.IvbBIb7wEsrnRJjp5OcDUZEuclPnwMGB0Zsf_ODtnpQ
 
 @guest1AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJndWVzdDIiLCJsYXN0TmFtZSI6Imd1ZXN0MiIsInBhc3N3b3JkIjoiJDJiJDEwJHZhVWNCN29MQUh4ZDRHcDJpOVZZYS51RkdNM3BsMXRyY25NL3pJRDNncUEwLnhOVXdReGpTIiwicGhvbmVOdW1iZXIiOjIyMjIyMjIyLCJyb2xlIjoiZ3Vlc3QiLCJ2ZXJpZmllZCI6ZmFsc2UsIl9pZCI6IjYyMDQzZDhkOWQzNjFiOTY4ZjhmMDQxOSIsImlhdCI6MTY0NDQ0NTA2OSwiZXhwIjoxNjQ1MDQ5ODY5fQ.tMLpvV4LwMNSus7Pf9PTTREZRr7LCg2pqpDXatDra_c
 
@@ -23,7 +23,7 @@ content-type: application/json
     "lastName": "guest3",
     "phoneNumber": 123456,         
     "password": "123456",
-    "email":"alaedinnebenmbarek@gmail.com"
+    "email":"alaedinnebenmbarekq@gmail.com"
 }
 
 ### Login
@@ -31,8 +31,8 @@ POST {{$dotenv CLIENT_SERVER_URL}}/user/login HTTP/1.1
 content-type: application/json 
 
 {
-    "email": "alaedinnebenmbarek@gmail.com",         
-    "password": "11001100"
+    "email": "alaedinnebenmbarekq@gmail.com",         
+    "password": "123456"
 }
 
 ### forget password
@@ -321,13 +321,13 @@ content-type: application/json
     "role": "guest"
 }
 
-### Delete all admins
-POST {{$dotenv CLIENT_SERVER_URL}}/user/deletebyrole HTTP/1.1
-Authorization: bearer {{authToken}}
+### Delete user
+POST {{$dotenv CLIENT_SERVER_URL}}/user/delete HTTP/1.1
+Authorization: bearer {{guestAuthToken}}
 content-type: application/json 
 
 {
-    "role": "admin"
+    "userId": "64bb9020af65be62395e5113"
 }
 
 

@@ -389,3 +389,28 @@ exports.ResetPassword = async (req, res) => {
       .send({ message: "Could not process the request", status: "fail" });
   }
 };
+
+exports.DeleteUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await UserModel.findOne({ _id: userId });
+    if (userId !== req.user.id) {
+      return res.status(403).json({
+        message: "User not allowed to delete this acccount",
+        status: "fail",
+      });
+    }
+    if (!user) {
+      return res.json({ message: "User not found", status: "fail" });
+    }
+    await UserModel.deleteOne({ _id: userId });
+    return res.status(200).send({
+      message: "User deleted succcessfully",
+      statusCode: 200,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: "Could not process the request", status: "fail" });
+  }
+};

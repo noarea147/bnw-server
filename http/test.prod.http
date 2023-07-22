@@ -21,6 +21,7 @@ content-type: application/json
     "lastName": "Tlili",
     "phoneNumber": 51782046,         
     "password": "123456",
+    "email": "alaedinnebenmbarek@gmail.com",
     "role": "guest"
 }
 
@@ -29,11 +30,8 @@ POST {{$dotenv prodUrl}}/user/login HTTP/1.1
 content-type: application/json 
 
 {
-    "firstName": "Idris",
-    "lastName": "tlili",
-    "phoneNumber": 28896272,         
-    "password": "123456",
-    "role": "guest"
+    "email": "alaedinnebenmbarek@gmail.com",
+    "password": "123456"
 }
 
 ### Update user
