@@ -21,7 +21,7 @@ csvtojson()
           price: item.price,
           image: item.image,
         });
-        console.log(product);
+        console.log(product.title + " is successfully imported !");
         try {
           await product.save();
           console.log("Product saved:", product);
