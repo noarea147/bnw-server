@@ -368,11 +368,12 @@ Authorization: bearer {{authToken}}
 }
 
 ### send notification
-POST {{$dotenv prodUrl}}/game/sendnotification HTTP/1.1
+POST http://localhost:3001/products/getProducts HTTP/1.1
 content-type: application/json
 Authorization: bearer {{authToken}}
 
 {
-    "title": "Noir ou Blanc",
-    "body": "vous avez gagné le jeu Noir ou Blanc"
+    
+    "limit" : 10
+    
 }

@@ -1,9 +1,11 @@
 {
-  "name": "help_me",
+  "name": "gazprom-be",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dbCleanUp": "node middleware/cleanUp.js",
+    "importDB": "node middleware/import.js",
     "dev": "nodemon index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,25 +14,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ayment64/help_me.git"
+    "url": "git+https://github.com/ayment64/gazprom-be.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ayment64/help_me/issues"
+    "url": "https://github.com/ayment64/gazprom-be/issues"
   },
-  "homepage": "https://github.com/ayment64/help_me#readme",
+  "homepage": "https://github.com/ayment64/gazprom-be#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "csvtojson": "^2.0.10",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase": "^9.4.1",
     "firebase-admin": "^10.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12",
+    "mongoose": "^6.12.9",
     "node-fetch": "^2.6.6",
     "nodemailer": "^6.9.3",
     "nodemon": "^2.0.15",
